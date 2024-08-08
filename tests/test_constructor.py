@@ -1,28 +1,25 @@
 import locators
-from selenium import webdriver
 from selenium.webdriver.common.by import By
+import pytest
 
 
-def test_to_sauces_tab():
-    driver = webdriver.Chrome()
-    driver.get("https://stellarburgers.nomoreparties.site/")
-    driver.find_element(By.XPATH, locators.tab_sauces).click()
-    assert driver.find_element(By.XPATH, locators.sauce)
-    driver.quit()
+@pytest.mark.parametrize('setup', ['main_page'], indirect=True)
+def test_to_sauces_tab(setup):
+    driver = setup
+    driver.find_element(By.XPATH, locators.tab_sauces_not_selected).click()
+    assert driver.find_element(By.XPATH, locators.tab_sauces_selected)
 
 
-def test_to_buns_tab():
-    driver = webdriver.Chrome()
-    driver.get("https://stellarburgers.nomoreparties.site/")
-    driver.find_element(By.XPATH, locators.tab_sauces).click()
+@pytest.mark.parametrize('setup', ['main_page'], indirect=True)
+def test_to_buns_tab(setup):
+    driver = setup
+    driver.find_element(By.XPATH, locators.tab_sauces_not_selected).click()
     driver.find_element(By.XPATH, locators.tab_buns).click()
     assert driver.find_element(By.XPATH, locators.bun)
-    driver.quit()
 
 
-def test_to_toppings_tab():
-    driver = webdriver.Chrome()
-    driver.get("https://stellarburgers.nomoreparties.site/")
+@pytest.mark.parametrize('setup', ['main_page'], indirect=True)
+def test_to_toppings_tab(setup):
+    driver = setup
     driver.find_element(By.XPATH, locators.tab_toppings).click()
     assert driver.find_element(By.XPATH, locators.header_toppings)
-    driver.quit()

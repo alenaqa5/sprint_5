@@ -2,8 +2,10 @@ import locators
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+import pytest
 
 
+@pytest.mark.parametrize('setup', ['main_page'], indirect=True)
 def test_logout_from_profile(login):
     driver = login
     driver.find_element(By.XPATH, locators.personal_account_button).click()

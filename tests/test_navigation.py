@@ -2,8 +2,10 @@ import locators
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+import pytest
 
 
+@pytest.mark.parametrize('setup', ['main_page'], indirect=True)
 def test_navigation_to_profile(login):
     driver = login
     driver.find_element(By.XPATH, locators.personal_account_button).click()
@@ -11,6 +13,7 @@ def test_navigation_to_profile(login):
     assert driver.find_element(By.XPATH, locators.logout_button)
 
 
+@pytest.mark.parametrize('setup', ['main_page'], indirect=True)
 def test_navigate_to_constructor_by_constructor_button(login):
     driver = login
     driver.find_element(By.XPATH, locators.personal_account_button).click()
@@ -19,6 +22,7 @@ def test_navigate_to_constructor_by_constructor_button(login):
     assert driver.find_element(By.XPATH, locators.collect_burger)
 
 
+@pytest.mark.parametrize('setup', ['main_page'], indirect=True)
 def test_navigate_to_constructor_by_logo(login):
     driver = login
     driver.find_element(By.XPATH, locators.personal_account_button).click()
