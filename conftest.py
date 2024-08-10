@@ -35,7 +35,6 @@ def login(setup):
     driver.find_element(By.XPATH, locators.login_button).click()
     WebDriverWait(driver, 3).until(expected_conditions.presence_of_element_located((By.XPATH, locators.create_order)))
     yield driver
-    driver.quit()
 
 @pytest.fixture
 def setup(request):
